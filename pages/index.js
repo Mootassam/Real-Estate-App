@@ -33,7 +33,6 @@ const Banner = ({
   </Flex>
 );
 export default function Home({ propertiesForSale, propertyForRent }) {
-  console.log(propertiesForSale, propertyForRent);
   return (
     <Box>
       <Banner
