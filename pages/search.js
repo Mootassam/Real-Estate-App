@@ -4,9 +4,11 @@ import Image from "next/image";
 import { Flex, Box, Text, Icon } from "@chakra-ui/react";
 import { BsFilter } from "react-icons/bs";
 import SearchFilters from "../components/SearchFilters";
+import { baseUrl, fetchApi } from "../utils/fetchApi";
+
 import Property from "../components/Property";
 import noresult from "../assets/images/noresult.png";
-const Search = () => {
+const Search = ({ properties }) => {
   const [searchFilters, setSearchFilters] = useState(false);
   const router = useRouter();
   return (
@@ -15,7 +17,7 @@ const Search = () => {
         cursor='pointer'
         bg='gray.100'
         borderBottom='1px'
-        borderColor='gray.200'
+        bordbaseUrlerColor='gray.200'
         p='2'
         fontWeight='black'
         fontSize='lg'
@@ -30,11 +32,11 @@ const Search = () => {
         Properties {router.query.purpose}
       </Text>
       <Flex flexWrap='wrap'>
-        {[].map((property) => (
+        {properties.map((property) => (
           <Property property={property} key={property.id} />
         ))}
       </Flex>
-      {[].length === 0 && (
+      {properties.length === 0 && (
         <Flex justifyContent='center' alignItems='center'>
           <Image alt='no result' src={noresult} />
           <Text fontSize='2xl' marginTop='3'>
@@ -46,3 +48,24 @@ const Search = () => {
   );
 };
 export default Search;
+export async function getServerSideProps({ query }) {
+  const purpose = query.purpose || "for-rent";
+  const rentFrequency = query.rentFrequency || "yearly";
+  const minPrice = query.minPrice || "0";
+  const maxPrice = query.maxPrice || "1000000";
+  const roomsMin = query.roomsMin || "0";
+  const bathsMin = query.bathsMin || "0";
+  const sort = query.sort || "price-desc";
+  const areaMax = query.areaMax || "35000";
+  const locationExternalIDs = query.locationExternalIDS || "5002";
+  const categoryExternalID = query.categoryExternalID || "4";
+  const data = await fetchApi(
+    `${baseUrl}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&rentFrequency=${rentFrequency}&minPrice=${minPrice}&maxPrice=${maxPrice}&roomsMin=${roomsMin}&bathsMin=${bathsMin}&sort=${sort}&areaMax=${areaMax}&categoryExternalID=${categoryExternalID}`
+  );
+
+  return {
+    props: {
+      properties: data?.hits,
+    },
+  };
+}
