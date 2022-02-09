@@ -1,16 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  Flex,
-  Select,
-  Box,
-  Text,
-  Input,
-  Spinner,
-  Icon,
-} from "@chakra-ui/react";
+import { Flex, Select, Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { MdCancel } from "react-icons/md";
-import Image from "next/image";
 import { getFilterValues, filterData } from "../utils/filterData";
 const SearchFilters = () => {
   const [filters, setFilters] = useState(filterData);
