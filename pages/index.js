@@ -15,15 +15,15 @@ const Banner = ({
   <Flex flexWrap='wrap' justifyContent='center' alignItems='center' m='10'>
     <Image src={imageUrl} width={500} height={300} alt='banner' />
     <Box p='5'>
-      <Text color='gray.500' fontsize='sm' fontweight='medium'>
+      <Text color='gray.500' fontsize='sm' fontWeight='medium'>
         {purpose}
       </Text>
-      <Text fontsize='3x1' fontWeight='bold'>
+      <Text fontSize='3x1' fontWeight='bold'>
         {title1}
         <br />
         {title2}
       </Text>
-      <Text fontsize='lg' paddingTop='3' paddingBottom='3' color='gray.700'>
+      <Text fontSize='lg' paddingTop='3' paddingBottom='3' color='gray.700'>
         {desc1}
       </Text>
       <Button fontSize='x1' bg='blue.300' color='white'>

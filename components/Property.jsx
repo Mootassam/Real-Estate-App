@@ -26,7 +26,7 @@ const Property = ({
       w='420px'
       p='5'
       padding
-      Top='0'
+      borderTop='0'
       justifyContent='flex-start'
       cursor='pointer'>
       <Box>
